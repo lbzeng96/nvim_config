@@ -1,6 +1,6 @@
 local opt = vim.opt -- for conciseness
 
---vim.opt.guifont = "MesloLGS NF:h12" -- set font for windows
+vim.opt.guifont = "MesloLGS NF:h12" -- set font for windows
 opt.autowrite = true -- Enable auto write
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
