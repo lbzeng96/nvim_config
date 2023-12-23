@@ -237,7 +237,12 @@ return {
 			else
 				cb({
 					type = "executable",
-					command = "/home/lbz/miniconda3/envs/debugpy/bin/python",
+					-- linux
+					-- command = "/home/lbz/miniconda3/envs/debugpy/bin/python",
+
+					-- windows
+					command = "D:/anaconda3/envs/debugpy/python.exe",
+
 					args = { "-m", "debugpy.adapter" },
 					options = {
 						source_filetype = "python",
@@ -260,14 +265,10 @@ return {
 					-- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
 					-- the code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
 					-- you could adapt this - to for example use the `virtual_env` environment variable.
-					local cwd = vim.fn.getcwd()
-					if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-						return cwd .. "/venv/bin/python"
-					elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-						return cwd .. "/.venv/bin/python"
-					else
-						return "/home/lbz/miniconda3/envs/debugpy/bin/python"
-					end
+					-- linux
+					--return "/home/lbz/miniconda3/envs/debugpy/bin/python"
+					-- windows
+					return "D:/anaconda3/envs/debugpy/python.exe"
 				end,
 			},
 		}
@@ -276,7 +277,11 @@ return {
 		dap.adapters.cppdbg = {
 			id = "cppdbg",
 			type = "executable",
-			command = "/home/lbz/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
+			-- linux
+			-- command = "/home/lbz/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
+
+			-- windows
+			command = "C:/Users/LBZ/AppData/Local/nvim-data/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7.exe",
 		}
 
 		dap.configurations.cpp = {
