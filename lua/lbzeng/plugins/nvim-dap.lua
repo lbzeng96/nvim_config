@@ -148,6 +148,12 @@ return {
 		daptext.setup()
 		dapui.setup()
 
+		if vim.fn.has("win32") == 1 then
+			EXECUTABLE = "OpenDebugAD7.exe"
+		else
+			EXECUTABLE = "OpenDebugAD7"
+		end
+
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open()
 		end
@@ -277,23 +283,22 @@ return {
 		dap.adapters.cppdbg = {
 			id = "cppdbg",
 			type = "executable",
-			-- linux
-			-- command = "/home/lbz/.local/share/nvim/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
-
-			-- windows
-			command = "C:/Users/LBZ/AppData/Local/nvim-data/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7.exe",
+			command = vim.fn.stdpath("data") .. "/mason/packages/cpptools/extension/debugAdapters/bin/" .. EXECUTABLE,
+			options = {
+				detached = false,
+			},
 		}
 
 		dap.configurations.cpp = {
 			{
-				name = "launch file",
+				name = "Launch file",
 				type = "cppdbg",
 				request = "launch",
 				program = function()
 					return vim.fn.input("path to executable: ", vim.fn.getcwd() .. "/", "file")
 				end,
 				cwd = "${workspaceFolder}",
-				stopatentry = true,
+				stopAtEntry = true,
 			},
 			-- {
 			-- 	name = 'attach to gdbserver :1234',
